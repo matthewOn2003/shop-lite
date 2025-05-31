@@ -1,77 +1,43 @@
-const products = [
-  {
-    id: 1,
-    name: '小米 14 Pro',
-    price: 3999,
-    imageUrl: 'https://via.placeholder.com/300x200?text=小米+14+Pro',
-  },
-  {
-    id: 2,
-    name: 'iPhone 15',
-    price: 5999,
-    imageUrl: 'https://via.placeholder.com/300x200?text=iPhone+15',
-  },
-  {
-    id: 3,
-    name: '联想笔记本',
-    price: 4999,
-    imageUrl: 'https://via.placeholder.com/300x200?text=联想+笔记本',
-  },
-  {
-    id: 4,
-    name: 'TCL 智能电视',
-    price: 2899,
-    imageUrl: 'https://via.placeholder.com/300x200?text=TCL+电视',
-  },
-  {
-    id: 1,
-    name: '小米 14 Pro',
-    price: 3999,
-    imageUrl: 'https://via.placeholder.com/300x200?text=小米+14+Pro',
-  },
-  {
-    id: 2,
-    name: 'iPhone 15',
-    price: 5999,
-    imageUrl: 'https://via.placeholder.com/300x200?text=iPhone+15',
-  },
-  {
-    id: 3,
-    name: '联想笔记本',
-    price: 4999,
-    imageUrl: 'https://via.placeholder.com/300x200?text=联想+笔记本',
-  },
-  {
-    id: 4,
-    name: 'TCL 智能电视',
-    price: 2899,
-    imageUrl: 'https://via.placeholder.com/300x200?text=TCL+电视',
-  },
-  {
-    id: 1,
-    name: '小米 14 Pro',
-    price: 3999,
-    imageUrl: 'https://via.placeholder.com/300x200?text=小米+14+Pro',
-  },
-  {
-    id: 2,
-    name: 'iPhone 15',
-    price: 5999,
-    imageUrl: 'https://via.placeholder.com/300x200?text=iPhone+15',
-  },
-  {
-    id: 3,
-    name: '联想笔记本',
-    price: 4999,
-    imageUrl: 'https://via.placeholder.com/300x200?text=联想+笔记本',
-  },
-  {
-    id: 4,
-    name: 'TCL 智能电视',
-    price: 2899,
-    imageUrl: 'https://via.placeholder.com/300x200?text=TCL+电视',
+// src/data/products.js
+
+import categories from "./categories";
+
+/** @typedef {Object} Product
+ *  @property {number} id
+ *  @property {string} name
+ *  @property {string} category
+ *  @property {number} price
+ *  @property {string} imageUrl
+ */
+
+/** @type {Product[]} */
+const products = [];
+
+
+let idCounter = 1;
+
+for (const category of categories) {
+  for (let i = 1; i <= 12; i++) {
+    const paddedIndex = String(i).padStart(2, '0');
+    const name = `${capitalize(category)} Sample`;
+    const imageUrl = `/assets/img/${category}-${paddedIndex}.png`;
+
+    products.push({
+      id: idCounter++,
+      name,
+      category,
+      price: randomPrice(100, 999), // 你可以换成固定价格
+      imageUrl,
+    });
   }
-];
+}
 
+function capitalize(word) {
+  return word[0].toUpperCase() + word.slice(1);
+}
 
-export default products
+function randomPrice(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+export default products;
